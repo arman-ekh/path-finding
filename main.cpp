@@ -9,7 +9,8 @@
 
 void bfs(bool* found , std::queue<Graph_Node*> graph_queue , std::string destination_graph_name);
 void dfs(std::stack<Graph_Node*> graph_stack ,std::stack<int> children_index , std::string destination_graph_name );
-
+bool dls(std::stack<Graph_Node*> graph_stack ,std::stack<int> children_index , std::string destination_graph_name ,int limit );
+void ucs(std::stack<Graph_Node*> graph_stack ,std::stack<int> children_index , std::string destination_graph_name );
 
 int main() {
     const int screenWidth = 1280;
@@ -60,6 +61,23 @@ int main() {
     bfs(&found, graph_queue, destination_graph_name);
 
 
+    std::stack<Graph_Node*> graph_stack_dls;
+    std::stack<int> children_index_dls;
+
+    graph_stack_dls.push(nodeA);
+    children_index_dls.push(0);
+
+    int dls_limit = 3;
+    bool found_dls = dls(graph_stack_dls, children_index_dls, destination_graph_name, dls_limit);
+
+
+    std::stack<Graph_Node*> graph_stack_ucs;
+    std::stack<int> children_index_ucs;
+
+    graph_stack_ucs.push(nodeA);
+    children_index_ucs.push(0);
+    ucs(graph_stack_ucs, children_index_ucs, destination_graph_name);
+
     // InitWindow(screenWidth, screenHeight, "PATH_FINDING");
     // SetTargetFPS(60);
     //
@@ -83,12 +101,12 @@ int main() {
 }
 
 void bfs(bool* found , std::queue<Graph_Node*> graph_queue , std::string destination_graph_name) {
-
     while (!*found && !graph_queue.empty()) {
         Graph_Node* current = graph_queue.front();
-        std::cout <<"checking : " <<current->get_name() <<std::endl;
+        std::cout <<"checking : " <<current->get_name() << " " ;
         if (current->get_name() == destination_graph_name) {
             *found = true;
+            std::cout << std::endl;
         }
 
         int child_count = current->get_children().get_list_size();
@@ -108,6 +126,7 @@ void bfs(bool* found , std::queue<Graph_Node*> graph_queue , std::string destina
 }
 
 void dfs(std::stack<Graph_Node*> graph_stack ,std::stack<int> children_index , std::string destination_graph_name ) {
+    std::cout << "checking :  " ;
     while (!graph_stack.empty()) {
 
         Graph_Node* node = graph_stack.top();
@@ -115,9 +134,10 @@ void dfs(std::stack<Graph_Node*> graph_stack ,std::stack<int> children_index , s
 
         int child_count = node->get_children().get_list_size();
 
-        std::cout << "current: " << node->get_name() << std::endl;
+        std::cout << node->get_name() << " ";
 
         if (node->get_name() == destination_graph_name) {
+            std::cout << std::endl;
             break;
         }
 
@@ -141,3 +161,52 @@ void dfs(std::stack<Graph_Node*> graph_stack ,std::stack<int> children_index , s
 
 }
 
+bool dls(std::stack<Graph_Node*> graph_stack ,std::stack<int> children_index , std::string destination_graph_name ,int limit ) {
+    std::cout << "current: " ;
+    int depth = 0;
+    while (!graph_stack.empty()) {
+        depth = graph_stack.size();
+
+        Graph_Node* node = graph_stack.top();
+        int index = children_index.top();
+
+        int child_count = node->get_children().get_list_size();
+
+        std::cout << node->get_name() << " ";
+
+
+        if (node->get_name() == destination_graph_name && depth <= limit) {
+            std::cout << std::endl;
+            return true;
+        }
+
+        if (index >= child_count || depth >= limit) {
+            graph_stack.pop();
+            children_index.pop();
+
+            if (!children_index.empty()) {
+                children_index.top()++;
+            }
+
+            continue;
+        }
+
+        Graph_Node* child =
+            node->get_children().get_node(index)->get_data();
+
+        graph_stack.push(child);
+        children_index.push(0);
+    }
+    return false;
+}
+
+void ucs(std::stack<Graph_Node*> graph_stack ,std::stack<int> children_index , std::string destination_graph_name ) {
+    bool found = false;
+    int depth = 0;
+
+    while (!found) {
+        std::cout << std::endl << "depth: " << depth << std::endl;
+        found =  dls(graph_stack, children_index, destination_graph_name, depth);
+        depth++;
+    }
+}
