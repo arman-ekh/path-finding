@@ -11,6 +11,7 @@ void bfs(bool* found , std::queue<Graph_Node*> graph_queue , std::string destina
 void dfs(std::stack<Graph_Node*> graph_stack ,std::stack<int> children_index , std::string destination_graph_name );
 bool dls(std::stack<Graph_Node*> graph_stack ,std::stack<int> children_index , std::string destination_graph_name ,int limit );
 void ids(std::stack<Graph_Node*> graph_stack ,std::stack<int> children_index , std::string destination_graph_name );
+void ucs(DoublyLinkedList<Graph_Node*>& graph_list_ucs,DoublyLinkedList<int>& graph_list_cost,std::string destination_graph_name);
 
 int main() {
     const int screenWidth = 1280;
@@ -23,6 +24,13 @@ int main() {
     Graph_Node* nodeE = new Graph_Node("E");
     Graph_Node* nodeF = new Graph_Node("F");
     Graph_Node* nodeG = new Graph_Node("G");
+
+    nodeB->set_cost(10);
+    nodeC->set_cost(3);
+    nodeD->set_cost(2);
+    nodeE->set_cost(4);
+    nodeF->set_cost(2);
+    nodeG->set_cost(1);
 
 
     DoublyLinkedList<Graph_Node*> graph;
@@ -77,6 +85,15 @@ int main() {
     graph_stack_ucs.push(nodeA);
     children_index_ucs.push(0);
     ids(graph_stack_ucs, children_index_ucs, destination_graph_name);
+
+    DoublyLinkedList<Graph_Node*> graph_list_ucs;
+    DoublyLinkedList<int>graph_list_cost;
+
+    graph_list_ucs.add_node(nodeA);
+    graph_list_cost.add_node(0);
+
+    ucs(graph_list_ucs, graph_list_cost, destination_graph_name);
+
 
     // InitWindow(screenWidth, screenHeight, "PATH_FINDING");
     // SetTargetFPS(60);
@@ -208,5 +225,56 @@ void ids(std::stack<Graph_Node*> graph_stack ,std::stack<int> children_index , s
         std::cout << std::endl << "depth: " << depth << std::endl;
         found =  dls(graph_stack, children_index, destination_graph_name, depth);
         depth++;
+    }
+}
+
+void ucs(DoublyLinkedList<Graph_Node*>& graph_list_ucs,DoublyLinkedList<int>& graph_list_cost,std::string destination_graph_name) {
+
+    bool found = false;
+
+    while (!found) {
+        int min_cost = INT_MAX;
+        int father_index = -1;
+
+        for (int i = 0; i < graph_list_cost.get_list_size(); i++) {
+            Graph_Node* min_check = graph_list_ucs.get_node(i)->get_data();
+
+            std::cout << "checking: " << min_check->get_name() << std::endl;
+
+            if (min_check->get_name() == destination_graph_name) {
+                found = true;
+                break;
+            }
+
+            if (min_check->get_cost() < min_cost) {
+                min_cost = min_check->get_cost();
+                father_index = i;
+            }
+        }
+
+        if (found)
+            break;
+
+        Graph_Node* father =
+            graph_list_ucs.get_node(father_index)->get_data();
+
+        graph_list_ucs.remove_node(father_index);
+        graph_list_cost.remove_node(father_index);
+
+        std::cout << "adding : ";
+
+        for (int j = 0; j < father->get_children().get_list_size(); j++) {
+            Graph_Node* child =
+                father->get_children().get_node(j)->get_data();
+
+            child->set_cost(father->get_cost() + child->get_cost());
+
+            graph_list_ucs.add_node(child);
+            graph_list_cost.add_node(child->get_cost());
+
+            std::cout << child->get_name() << " ";
+        }
+
+        std::cout << std::endl;
     }
 }

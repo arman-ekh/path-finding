@@ -8,12 +8,14 @@ private:
     Graph_Node* father;
     DoublyLinkedList<Graph_Node*>* children;
     std::string name;
+    int cost;
 
 public:
     Graph_Node(std::string name) {
         father = nullptr;
         children = new DoublyLinkedList<Graph_Node*>();
         this->name = name;
+        cost = 0;
     }
 
     void set_father(Graph_Node* f) { father = f; }
@@ -33,7 +35,8 @@ public:
         }
     }
 
-
+    int get_cost() const { return cost; }
+    void set_cost(int c) { cost = c; }
 
     ~Graph_Node() {
         if (!children) {
