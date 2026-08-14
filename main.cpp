@@ -10,7 +10,7 @@
 void bfs(bool* found , std::queue<Graph_Node*> graph_queue , std::string destination_graph_name);
 void dfs(std::stack<Graph_Node*> graph_stack ,std::stack<int> children_index , std::string destination_graph_name );
 bool dls(std::stack<Graph_Node*> graph_stack ,std::stack<int> children_index , std::string destination_graph_name ,int limit );
-void ucs(std::stack<Graph_Node*> graph_stack ,std::stack<int> children_index , std::string destination_graph_name );
+void ids(std::stack<Graph_Node*> graph_stack ,std::stack<int> children_index , std::string destination_graph_name );
 
 int main() {
     const int screenWidth = 1280;
@@ -76,7 +76,7 @@ int main() {
 
     graph_stack_ucs.push(nodeA);
     children_index_ucs.push(0);
-    ucs(graph_stack_ucs, children_index_ucs, destination_graph_name);
+    ids(graph_stack_ucs, children_index_ucs, destination_graph_name);
 
     // InitWindow(screenWidth, screenHeight, "PATH_FINDING");
     // SetTargetFPS(60);
@@ -200,7 +200,7 @@ bool dls(std::stack<Graph_Node*> graph_stack ,std::stack<int> children_index , s
     return false;
 }
 
-void ucs(std::stack<Graph_Node*> graph_stack ,std::stack<int> children_index , std::string destination_graph_name ) {
+void ids(std::stack<Graph_Node*> graph_stack ,std::stack<int> children_index , std::string destination_graph_name ) {
     bool found = false;
     int depth = 0;
 
