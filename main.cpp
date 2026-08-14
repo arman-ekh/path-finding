@@ -1,9 +1,15 @@
 #include <iostream>
+#include <queue>
 #include <stack>
 
 #include "raylib.h"
 #include "Header/DoublyLinkedList.h"
 #include "Header/Graph_Node.h"
+
+
+void bfs(bool* found , std::queue<Graph_Node*> graph_queue , std::string destination_graph_name);
+void dfs(std::stack<Graph_Node*> graph_stack ,std::stack<int> children_index , std::string destination_graph_name );
+
 
 int main() {
     const int screenWidth = 1280;
@@ -35,7 +41,7 @@ int main() {
     nodeC->add_child(nodeF);
     nodeC->add_child(nodeG);
 
-    std::string orign_graph_name = "A";
+    std::string origin_graph_name = "A";
     std::string destination_graph_name = "F";
 
 
@@ -45,6 +51,63 @@ int main() {
     graph_stack.push(nodeA);
     children_index.push(0);
 
+    dfs(graph_stack, children_index, destination_graph_name);
+
+
+    std::queue<Graph_Node*> graph_queue;
+    graph_queue.push(nodeA);
+    bool found = false;
+    bfs(&found, graph_queue, destination_graph_name);
+
+
+    // InitWindow(screenWidth, screenHeight, "PATH_FINDING");
+    // SetTargetFPS(60);
+    //
+    // float dt;
+    //
+    //
+    //
+    // while (!WindowShouldClose()) {
+    //     dt = GetFrameTime();
+    //     BeginDrawing();
+    //
+    //
+    //
+    //
+    //
+    //     ClearBackground(WHITE);
+    //     EndDrawing();
+    // }
+
+    return 0;
+}
+
+void bfs(bool* found , std::queue<Graph_Node*> graph_queue , std::string destination_graph_name) {
+
+    while (!*found && !graph_queue.empty()) {
+        Graph_Node* current = graph_queue.front();
+        std::cout <<"checking : " <<current->get_name() <<std::endl;
+        if (current->get_name() == destination_graph_name) {
+            *found = true;
+        }
+
+        int child_count = current->get_children().get_list_size();
+        if (child_count <= 0 ) {
+            graph_queue.pop();
+        }else {
+            graph_queue.pop();
+            std::cout << "adding: ";
+            for (int i = 0; i < child_count; i++) {
+                Graph_Node* child = current->get_children().get_node(i)->get_data();
+                graph_queue.push(child);
+                std::cout <<child->get_name() << " ";
+            }
+            std::cout << std::endl;
+        }
+    }
+}
+
+void dfs(std::stack<Graph_Node*> graph_stack ,std::stack<int> children_index , std::string destination_graph_name ) {
     while (!graph_stack.empty()) {
 
         Graph_Node* node = graph_stack.top();
@@ -75,26 +138,6 @@ int main() {
         graph_stack.push(child);
         children_index.push(0);
     }
-    // InitWindow(screenWidth, screenHeight, "PATH_FINDING");
-    // SetTargetFPS(60);
-    //
-    // float dt;
-    //
-    //
-    //
-    // while (!WindowShouldClose()) {
-    //     dt = GetFrameTime();
-    //     BeginDrawing();
-    //
-    //
-    //
-    //
-    //
-    //     ClearBackground(WHITE);
-    //     EndDrawing();
-    // }
 
-    return 0;
 }
-
 
