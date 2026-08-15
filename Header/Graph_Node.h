@@ -9,9 +9,10 @@ private:
     DoublyLinkedList<Graph_Node*>* children;
     std::string name;
     int cost;
+    float x,y;
 
 public:
-    Graph_Node(std::string name) {
+    Graph_Node(std::string name , float x, float y) {
         father = nullptr;
         children = new DoublyLinkedList<Graph_Node*>();
         this->name = name;

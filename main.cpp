@@ -5,6 +5,7 @@
 #include "raylib.h"
 #include "Header/DoublyLinkedList.h"
 #include "Header/Graph_Node.h"
+#include "Header/Graph.h"
 
 
 void bfs(bool* found , std::queue<Graph_Node*> graph_queue , std::string destination_graph_name);
@@ -17,31 +18,13 @@ int main() {
     const int screenWidth = 1280;
     const int screenHeight = 720;
 
-    Graph_Node* nodeA = new Graph_Node("A");
-    Graph_Node* nodeB = new Graph_Node("B");
-    Graph_Node* nodeC = new Graph_Node("C");
-    Graph_Node* nodeD = new Graph_Node("D");
-    Graph_Node* nodeE = new Graph_Node("E");
-    Graph_Node* nodeF = new Graph_Node("F");
-    Graph_Node* nodeG = new Graph_Node("G");
-
-    nodeB->set_cost(10);
-    nodeC->set_cost(3);
-    nodeD->set_cost(2);
-    nodeE->set_cost(4);
-    nodeF->set_cost(2);
-    nodeG->set_cost(1);
-
-
-    DoublyLinkedList<Graph_Node*> graph;
-    graph.add_node(nodeA);
-    graph.add_node(nodeB);
-    graph.add_node(nodeC);
-    graph.add_node(nodeD);
-    graph.add_node(nodeE);
-    graph.add_node(nodeF);
-    graph.add_node(nodeG);
-
+    Graph_Node* nodeA = new Graph_Node("A",0,0);
+    Graph_Node* nodeB = new Graph_Node("B",0,0);
+    Graph_Node* nodeC = new Graph_Node("C",0,0);
+    Graph_Node* nodeD = new Graph_Node("D",0,0);
+    Graph_Node* nodeE = new Graph_Node("E",0,0);
+    Graph_Node* nodeF = new Graph_Node("F",0,0);
+    Graph_Node* nodeG = new Graph_Node("G",0,0);
 
     nodeA->add_child(nodeB);
     nodeA->add_child(nodeC);
@@ -49,6 +32,13 @@ int main() {
     nodeB->add_child(nodeE);
     nodeC->add_child(nodeF);
     nodeC->add_child(nodeG);
+
+    nodeB->set_cost(10);
+    nodeC->set_cost(3);
+    nodeD->set_cost(2);
+    nodeE->set_cost(4);
+    nodeF->set_cost(2);
+    nodeG->set_cost(1);
 
     std::string origin_graph_name = "A";
     std::string destination_graph_name = "F";
