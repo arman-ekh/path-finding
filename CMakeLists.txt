@@ -22,6 +22,7 @@ add_executable(path_finding main.cpp
         include/Visualization/Graph_Renderer.h
         include/Visualization/Algorithm_Renderer.h
         include/Visualization/UI.h
+        include/EDITOR/GraphEditor.h
 )
 
 

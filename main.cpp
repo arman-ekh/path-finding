@@ -65,7 +65,7 @@ int main() {
     graph_stack_dls.push(nodeA);
     children_index_dls.push(0);
 
-    int dls_limit = 3;
+    int dls_limit = 2;
     bool found_dls = dls(graph_stack_dls, children_index_dls, destination_graph_name, dls_limit);
 
 
