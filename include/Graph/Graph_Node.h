@@ -1,8 +1,6 @@
-//
-// Created by PAYAM RAYANE on 8/16/2026.
-//
-
 #ifndef PATH_FINDING_GRAPH_NODE_H
 #define PATH_FINDING_GRAPH_NODE_H
 
-#endif //PATH_FINDING_GRAPH_NODE_H
+class Graph_Node;
+
+#endif
