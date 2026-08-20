@@ -23,6 +23,19 @@ add_executable(path_finding main.cpp
         include/Visualization/Algorithm_Renderer.h
         include/Visualization/UI.h
         include/EDITOR/GraphEditor.h
+        src/Algorithms/Algorithm.cpp
+        src/Algorithms/BFS.cpp
+        src/Algorithms/DFS.cpp
+        src/Algorithms/DLS.cpp
+        src/Algorithms/IDS.cpp
+        src/Algorithms/UCS.cpp
+        src/EDITOR/GraphEditor.cpp
+        src/Graph/Graph.cpp
+        src/Graph/Edge.cpp
+        src/Graph/Graph_Node.cpp
+        src/Visualization/Algorithm_Renderer.cpp
+        src/Visualization/Graph_Renderer.cpp
+        src/Visualization/UI.cpp
 )
 
 
