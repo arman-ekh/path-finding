@@ -9,7 +9,6 @@
 class Graph_Node {
 
 private:
-
     std::string name;
 
     Vector2 position;
@@ -30,6 +29,8 @@ public:
     void set_position(Vector2 position);
 
     void add_edge(Edge* edge);
+
+    void remove_edge(Edge* edge);
 
     std::vector<Edge*>& get_edges();
 };

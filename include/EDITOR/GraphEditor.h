@@ -20,16 +20,18 @@ public:
 
     void draw();
 
-private:
+// private:
     void handle_mouse();
 
-    void create_node();
+    void create_node(float x , float y);
 
-    void create_edge();
+    void create_edge(int cost , Graph_Node* from , Graph_Node* to);
 
-    void delete_node();
+    void delete_node(Graph_Node* node);
 
     Graph_Node* get_node_at(Vector2 position);
+
+    Graph_Node* get_node_at(std::string name);
 };
 
 #endif

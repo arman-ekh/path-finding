@@ -1,1 +1,35 @@
 #include "../../include/Graph/Graph_Node.h"
+
+Graph_Node::Graph_Node(const std::string &name, Vector2 position) {
+    this->name = name;
+    this->position = position;
+}
+
+void Graph_Node::add_edge(Edge *edge) {
+    this->edges.push_back(edge);
+}
+
+std::vector<Edge *> &Graph_Node::get_edges() {
+    return this->edges;
+}
+
+std::string Graph_Node::get_name() const {
+    return this->name;
+}
+
+Vector2 Graph_Node::get_position() const {
+    return this->position;
+}
+
+void Graph_Node::set_position(Vector2 position) {
+    this->position = position;
+}
+
+void Graph_Node::remove_edge(Edge* edge) {
+    for (auto it = edges.begin(); it != edges.end(); ++it) {
+        if (*it == edge) {
+            edges.erase(it);
+            return;
+        }
+    }
+}

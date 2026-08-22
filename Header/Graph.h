@@ -10,7 +10,7 @@ class Graph {
         DoublyLinkedList<Graph_Node*> graph;
         int node_counter = 0;
     public:
-        Graph_Node* create_node(float x, float y) {
+        Graph_Node* add_node(float x, float y) {
             std::string name =std::string(1, 'A' + node_counter);
             Graph_Node* node = new Graph_Node(name, x, y);
             graph.add_node(node);

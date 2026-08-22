@@ -3,6 +3,8 @@
 #include <stack>
 
 #include "raylib.h"
+#include "include/EDITOR/GraphEditor.h"
+#include "include/Graph/Graph.h"
 // #include "Header/DoublyLinkedList.h"
 // #include "Header/Graph_Node.h"
 // #include "Header/Graph.h"
@@ -17,7 +19,18 @@
 int main() {
     const int screenWidth = 1280;
     const int screenHeight = 720;
+    Graph graph;
+    auto *graph_editor = new GraphEditor(graph);
+    graph_editor->create_node(0,0);
+    graph_editor->create_node(0,0);
+    graph_editor->create_node(0,0);
+    graph_editor->create_node(0,0);
 
+
+    graph_editor->draw();
+
+    return 0;
+}
     // Graph_Node* nodeA = new Graph_Node("A",0,0);
     // Graph_Node* nodeB = new Graph_Node("B",0,0);
     // Graph_Node* nodeC = new Graph_Node("C",0,0);
@@ -104,8 +117,8 @@ int main() {
     //     EndDrawing();
     // }
 
-    return 0;
-}
+//     return 0;
+// }
 //
 // void bfs(bool* found , std::queue<Graph_Node*> graph_queue , std::string destination_graph_name) {
 //     while (!*found && !graph_queue.empty()) {

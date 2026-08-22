@@ -12,6 +12,7 @@
 class Graph {
 
 private:
+    int node_counter = 0;
 
     std::vector<Graph_Node*> nodes;
     std::vector<Edge*> edges;
@@ -23,16 +24,14 @@ public:
 
     Graph();
 
-    ~Graph();
-
-    Graph_Node* create_node(
+    void add_node(
         const std::string& name,
         Vector2 position
     );
 
     void delete_node(Graph_Node* node);
 
-    Edge* add_edge(
+    void add_edge(
         Graph_Node* from,
         Graph_Node* to,
         int cost

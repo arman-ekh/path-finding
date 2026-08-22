@@ -1,30 +1,27 @@
 #ifndef PATH_FINDING_EDGE_H
 #define PATH_FINDING_EDGE_H
 
-#include "Graph_Node.h"
+class Graph_Node;
 
 class Edge {
 
 private:
-
     Graph_Node* from;
     Graph_Node* to;
-
     int cost;
 
 public:
-
     Edge(
         Graph_Node* from,
         Graph_Node* to,
         int cost
     );
 
-    Graph_Node* get_from() const;
+    Graph_Node* get_from();
 
-    Graph_Node* get_to() const;
+    Graph_Node* get_to();
 
-    int get_cost() const;
+    int get_cost();
 };
 
-#endif //PATH_FINDING_EDGE_H
+#endif
