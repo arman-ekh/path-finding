@@ -1,8 +1,32 @@
-//
-// Created by PAYAM RAYANE on 8/16/2026.
-//
-
 #ifndef PATH_FINDING_UCS_H
 #define PATH_FINDING_UCS_H
 
-#endif //PATH_FINDING_UCS_H
+#include <queue>
+#include <set>
+
+#include "Algorithm.h"
+
+class UCS : public Algorithm {
+    private:
+        std::queue<Graph_Node*> queue;
+
+        std::set<Graph_Node*> visited;
+
+        Graph_Node* current = nullptr;
+
+        Graph_Node* goal = nullptr;
+
+    bool finished = false;
+    bool found = false;
+
+    public:
+        void initialize(Graph& graph) override;
+
+        void step() override;
+
+        bool is_finished() const override;
+
+        bool is_found() const override;
+};
+
+#endif

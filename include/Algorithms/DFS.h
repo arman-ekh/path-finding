@@ -1,6 +1,12 @@
 #ifndef PATH_FINDING_DFS_H
 #define PATH_FINDING_DFS_H
 
+
+#include <set>
+#include <stack>
+
+#include "Algorithm.h"
+
 class DFS : public Algorithm {
 
 private:

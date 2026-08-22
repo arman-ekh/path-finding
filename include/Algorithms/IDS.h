@@ -2,6 +2,10 @@
 #define PATH_FINDING_IDS_H
 
 
+#include "Algorithm.h"
+#include "DLS.h"
+
+
 class IDS : public Algorithm {
 
 private:

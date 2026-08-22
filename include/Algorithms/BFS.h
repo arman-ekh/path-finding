@@ -1,5 +1,11 @@
 #ifndef PATH_FINDING_BFS_H
 #define PATH_FINDING_BFS_H
+#include <queue>
+#include <set>
+
+#include "Algorithm.h"
+#include "..\Graph/Graph_Node.h"
+#include "..\Graph\Graph.h"
 
 class BFS : public Algorithm {
 

@@ -1,5 +1,9 @@
 #ifndef PATH_FINDING_DLS_H
 #define PATH_FINDING_DLS_H
+#include <set>
+#include <stack>
+
+#include "Algorithm.h"
 
 class DLS : public Algorithm {
 
