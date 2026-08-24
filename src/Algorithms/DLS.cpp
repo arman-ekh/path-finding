@@ -22,6 +22,10 @@ void DLS::initialize(Graph& graph) {
 }
 bool DLS::is_finished() {
     finished = (stack.empty() && !found);
+    if (depth >= depth_limit) {
+        std::cout << "Depth limit: ";
+        return true;
+    }
     return finished;
 }
 
@@ -57,6 +61,8 @@ void DLS::step() {
               << current->get_name()
               << " depth: "
               << depth
+              << "depth limit: "
+              << depth_limit
               << std::endl;
 
     if (current == goal && depth <= depth_limit) {
@@ -78,6 +84,7 @@ void DLS::step() {
         return;
     }
 
+
     Edge* edge = current->get_edges().at(index);
 
     Graph_Node* child = edge->get_to();
@@ -85,3 +92,4 @@ void DLS::step() {
     stack.push(child);
     children_index.push(0);
 }
+

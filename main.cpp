@@ -7,6 +7,7 @@
 #include "include/Algorithms/BFS.h"
 #include "include/Algorithms/DFS.h"
 #include "include/Algorithms/DLS.h"
+#include "include/Algorithms/IDS.h"
 #include "include/EDITOR/GraphEditor.h"
 #include "include/Graph/Graph.h"
 // #include "Header/DoublyLinkedList.h"
@@ -49,10 +50,10 @@ int main() {
     graph.set_goal(nodeE);
     graph.set_start(nodeA);
 
-    DLS* algorithm = nullptr;
-    algorithm = new DLS();
+    Algorithm* algorithm = nullptr;
+    algorithm = new IDS();
     algorithm->initialize(graph);
-    algorithm->set_depth_limit(1);
+
 
 
 
@@ -61,7 +62,7 @@ int main() {
 
 
     if (algorithm != nullptr) {
-        while (!algorithm->is_found() && !algorithm->is_finished()) {
+        while (!algorithm->is_finished() && !algorithm->is_found() ) {
             algorithm->step();
         }
         std::cout <<"found: " <<algorithm->is_found()<< std::endl;
