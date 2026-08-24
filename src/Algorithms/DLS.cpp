@@ -23,7 +23,6 @@ void DLS::initialize(Graph& graph) {
 bool DLS::is_finished() {
     finished = (stack.empty() && !found);
     if (depth >= depth_limit) {
-        std::cout << "Depth limit: ";
         return true;
     }
     return finished;

@@ -13,7 +13,6 @@ void IDS::initialize(Graph &graph) {
 void IDS::step() {
     dls.step();
     if (dls.is_finished()) {
-        std::cout << "depth limit : " << current_limit << std::endl;
         current_limit++;
         dls.set_depth_limit(current_limit);
         dls.initialize(*graph);
