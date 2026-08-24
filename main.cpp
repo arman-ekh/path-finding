@@ -4,6 +4,7 @@
 
 #include "raylib.h"
 #include "include/Algorithms/Algorithm.h"
+#include "include/Algorithms/BFS.h"
 #include "include/Algorithms/DFS.h"
 #include "include/EDITOR/GraphEditor.h"
 #include "include/Graph/Graph.h"
@@ -44,23 +45,24 @@ int main() {
     graph_editor->create_edge(0 , nodeB , nodeE);
     graph_editor->create_edge(0 , nodeC , nodeF);
 
-    graph.set_goal(nodeD);
+    graph.set_goal(nodeE);
     graph.set_start(nodeA);
 
     Algorithm* algorithm = nullptr;
-    algorithm = new DFS();
+    algorithm = new BFS();
     algorithm->initialize(graph);
 
 
 
 
-    graph_editor->draw();
+    // graph_editor->draw();
 
 
     if (algorithm != nullptr) {
         while (!algorithm->is_found() && !algorithm->is_finished()) {
             algorithm->step();
         }
+        std::cout <<"found: " <<algorithm->is_found()<< std::endl;
     }
 
 
