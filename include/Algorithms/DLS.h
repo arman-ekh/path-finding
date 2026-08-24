@@ -9,8 +9,7 @@ class DLS : public Algorithm {
 
 private:
     std::stack<Graph_Node*> stack;
-
-    std::set<Graph_Node*> visited;
+    std::stack<int> children_index;
 
     Graph_Node* current = nullptr;
 
@@ -18,7 +17,8 @@ private:
 
     bool finished = false;
     bool found = false;
-    int depth_limit;
+    int depth_limit = 0;
+    int depth = 0;
 
 public:
     void initialize(Graph& graph) override;
@@ -33,7 +33,7 @@ public:
 
     Graph_Node* get_current() const;
 
-    const std::set<Graph_Node*>& get_visited() const;
+    const std::stack<int>& get_visited() const;
 };
 
 #endif

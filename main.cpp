@@ -6,6 +6,7 @@
 #include "include/Algorithms/Algorithm.h"
 #include "include/Algorithms/BFS.h"
 #include "include/Algorithms/DFS.h"
+#include "include/Algorithms/DLS.h"
 #include "include/EDITOR/GraphEditor.h"
 #include "include/Graph/Graph.h"
 // #include "Header/DoublyLinkedList.h"
@@ -48,9 +49,10 @@ int main() {
     graph.set_goal(nodeE);
     graph.set_start(nodeA);
 
-    Algorithm* algorithm = nullptr;
-    algorithm = new BFS();
+    DLS* algorithm = nullptr;
+    algorithm = new DLS();
     algorithm->initialize(graph);
+    algorithm->set_depth_limit(1);
 
 
 
