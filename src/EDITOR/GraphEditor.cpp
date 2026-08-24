@@ -42,4 +42,5 @@ Graph_Node *GraphEditor::get_node_at(std::string name) {
             return node;
         }
     }
+    return nullptr;
 }

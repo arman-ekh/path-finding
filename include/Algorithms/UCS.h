@@ -24,9 +24,9 @@ class UCS : public Algorithm {
 
         void step() override;
 
-        bool is_finished() const override;
+        bool is_finished()  override;
 
-        bool is_found() const override;
+        bool is_found() override;
 };
 
 #endif

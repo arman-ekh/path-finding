@@ -27,9 +27,9 @@ public:
 
     void set_depth_limit(int limit);
 
-    bool is_finished() const override;
+    bool is_finished()  override;
 
-    bool is_found() const override;
+    bool is_found()  override;
 
     Graph_Node* get_current() const;
 

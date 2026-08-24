@@ -3,6 +3,8 @@
 #include <stack>
 
 #include "raylib.h"
+#include "include/Algorithms/Algorithm.h"
+#include "include/Algorithms/DFS.h"
 #include "include/EDITOR/GraphEditor.h"
 #include "include/Graph/Graph.h"
 // #include "Header/DoublyLinkedList.h"
@@ -21,13 +23,46 @@ int main() {
     const int screenHeight = 720;
     Graph graph;
     auto *graph_editor = new GraphEditor(graph);
-    graph_editor->create_node(0,0);
-    graph_editor->create_node(0,0);
-    graph_editor->create_node(0,0);
-    graph_editor->create_node(0,0);
+    graph_editor->create_node(0,1);
+    graph_editor->create_node(0,2);
+    graph_editor->create_node(0,3);
+    graph_editor->create_node(0,4);
+    graph_editor->create_node(0,5);
+    graph_editor->create_node(0,6);
+
+    Graph_Node* nodeA = graph_editor->get_node_at("A0");
+    Graph_Node* nodeB = graph_editor->get_node_at("A1");
+    Graph_Node* nodeC = graph_editor->get_node_at("A2");
+    Graph_Node* nodeD = graph_editor->get_node_at("A3");
+    Graph_Node* nodeE = graph_editor->get_node_at("A4");
+    Graph_Node* nodeF = graph_editor->get_node_at("A5");
+
+
+    graph_editor->create_edge(0,nodeA,nodeB);
+    graph_editor->create_edge(0,nodeA,nodeC);
+    graph_editor->create_edge(0,nodeB,nodeD);
+    graph_editor->create_edge(0 , nodeB , nodeE);
+    graph_editor->create_edge(0 , nodeC , nodeF);
+
+    graph.set_goal(nodeD);
+    graph.set_start(nodeA);
+
+    Algorithm* algorithm = nullptr;
+    algorithm = new DFS();
+    algorithm->initialize(graph);
+
+
 
 
     graph_editor->draw();
+
+
+    if (algorithm != nullptr) {
+        while (!algorithm->is_found() && !algorithm->is_finished()) {
+            algorithm->step();
+        }
+    }
+
 
     return 0;
 }
