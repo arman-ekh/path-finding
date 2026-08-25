@@ -15,6 +15,8 @@ private:
 
     std::vector<Edge*> edges;
 
+    int cost=0;
+
 public:
 
     Graph_Node(
@@ -33,6 +35,10 @@ public:
     void remove_edge(Edge* edge);
 
     std::vector<Edge*>& get_edges();
+
+    void set_cost(int cost);
+
+    int get_cost();
 };
 
 #endif

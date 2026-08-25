@@ -8,7 +8,7 @@
 
 class UCS : public Algorithm {
     private:
-        std::queue<Graph_Node*> queue;
+        std::vector<Graph_Node*> vector;
 
         std::set<Graph_Node*> visited;
 

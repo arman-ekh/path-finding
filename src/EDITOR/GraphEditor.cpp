@@ -12,10 +12,14 @@ void GraphEditor::create_edge(int cost , Graph_Node* from , Graph_Node* to ) {
     graph.add_edge(from , to , cost);
 }
 
-void GraphEditor::create_node(float x , float  y) {
+void GraphEditor::create_node(float x, float y) {
     int graph_size = graph.get_nodes().size();
-    auto vector2 = Vector2(x , y);
-    graph.add_node("A" + std::to_string(graph_size) , vector2);
+
+    char name = 'A' + graph_size;
+
+    Vector2 vector2(x, y);
+
+    graph.add_node(std::string(1, name), vector2);
 }
 
 void GraphEditor::delete_node(Graph_Node* node) {

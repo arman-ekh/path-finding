@@ -8,6 +8,7 @@
 #include "include/Algorithms/DFS.h"
 #include "include/Algorithms/DLS.h"
 #include "include/Algorithms/IDS.h"
+#include "include/Algorithms/UCS.h"
 #include "include/EDITOR/GraphEditor.h"
 #include "include/Graph/Graph.h"
 // #include "Header/DoublyLinkedList.h"
@@ -33,25 +34,25 @@ int main() {
     graph_editor->create_node(0,5);
     graph_editor->create_node(0,6);
 
-    Graph_Node* nodeA = graph_editor->get_node_at("A0");
-    Graph_Node* nodeB = graph_editor->get_node_at("A1");
-    Graph_Node* nodeC = graph_editor->get_node_at("A2");
-    Graph_Node* nodeD = graph_editor->get_node_at("A3");
-    Graph_Node* nodeE = graph_editor->get_node_at("A4");
-    Graph_Node* nodeF = graph_editor->get_node_at("A5");
+    Graph_Node* nodeA = graph_editor->get_node_at("A");
+    Graph_Node* nodeB = graph_editor->get_node_at("B");
+    Graph_Node* nodeC = graph_editor->get_node_at("C");
+    Graph_Node* nodeD = graph_editor->get_node_at("D");
+    Graph_Node* nodeE = graph_editor->get_node_at("E");
+    Graph_Node* nodeF = graph_editor->get_node_at("F");
 
 
-    graph_editor->create_edge(0,nodeA,nodeB);
-    graph_editor->create_edge(0,nodeA,nodeC);
-    graph_editor->create_edge(0,nodeB,nodeD);
-    graph_editor->create_edge(0 , nodeB , nodeE);
-    graph_editor->create_edge(0 , nodeC , nodeF);
+    graph_editor->create_edge(6,nodeA,nodeB);
+    graph_editor->create_edge(3,nodeA,nodeC);
+    graph_editor->create_edge(2,nodeB,nodeD);
+    graph_editor->create_edge(2 , nodeB , nodeE);
+    graph_editor->create_edge(2 , nodeC , nodeF);
 
     graph.set_goal(nodeE);
     graph.set_start(nodeA);
 
     Algorithm* algorithm = nullptr;
-    algorithm = new IDS();
+    algorithm = new UCS();
     algorithm->initialize(graph);
 
 

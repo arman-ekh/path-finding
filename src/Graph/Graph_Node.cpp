@@ -3,6 +3,7 @@
 Graph_Node::Graph_Node(const std::string &name, Vector2 position) {
     this->name = name;
     this->position = position;
+    this->cost = 0;
 }
 
 void Graph_Node::add_edge(Edge *edge) {
@@ -32,4 +33,12 @@ void Graph_Node::remove_edge(Edge* edge) {
             return;
         }
     }
+}
+
+int Graph_Node::get_cost() {
+    return cost;
+}
+
+void Graph_Node::set_cost(int cost) {
+    this->cost = cost;
 }
