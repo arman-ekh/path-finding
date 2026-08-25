@@ -50,5 +50,7 @@ public:
     std::vector<Graph_Node*>& get_nodes();
 
     std::vector<Edge*>& get_edges();
+
+    void reset_nodes();
 };
 #endif

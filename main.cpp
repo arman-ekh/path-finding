@@ -44,7 +44,7 @@ int main() {
 
     graph_editor->create_edge(6,nodeA,nodeB);
     graph_editor->create_edge(3,nodeA,nodeC);
-    graph_editor->create_edge(2,nodeB,nodeD);
+    graph_editor->create_edge(3,nodeB,nodeD);
     graph_editor->create_edge(2 , nodeB , nodeE);
     graph_editor->create_edge(2 , nodeC , nodeF);
 
@@ -66,6 +66,7 @@ int main() {
         while (!algorithm->is_finished() && !algorithm->is_found() ) {
             algorithm->step();
         }
+        graph.reset_nodes();
         std::cout <<"found: " <<algorithm->is_found()<< std::endl;
     }
 
