@@ -4,6 +4,7 @@ Graph_Node::Graph_Node(const std::string &name, Vector2 position) {
     this->name = name;
     this->position = position;
     this->cost = 0;
+    this->state = NodeState::UNSEEN;
 }
 
 void Graph_Node::add_edge(Edge *edge) {
@@ -41,4 +42,12 @@ int Graph_Node::get_cost() {
 
 void Graph_Node::set_cost(int cost) {
     this->cost = cost;
+}
+
+void Graph_Node::set_state(NodeState state) {
+    this->state = state;
+}
+
+NodeState Graph_Node::get_state() {
+    return this->state;
 }

@@ -4,11 +4,20 @@
 #include "..\Graph/Graph_Node.h"
 #include "..\Graph/Graph.h"
 
+enum class EditorMode {
+    SELECT,
+    CREATE_NODE,
+    CREATE_EDGE,
+    DELETE
+};
+
 class GraphEditor {
 
 private:
 
     Graph& graph;
+
+    EditorMode mode;
 
     Graph_Node* selected_node = nullptr;
 
@@ -20,6 +29,7 @@ public:
 
     void draw();
 
+    void set_mode(EditorMode mode);
 // private:
     void handle_mouse();
 

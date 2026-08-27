@@ -107,5 +107,6 @@ void Graph::reset_nodes() {
     int node_counter = nodes.size();
     for (int i = 0; i < node_counter; i++) {
         nodes.at(i)->set_cost(0);
+        nodes.at(i)->set_state(NodeState::UNSEEN);
     }
 }

@@ -1,11 +1,14 @@
 #include "../../include/EDITOR/GraphEditor.h"
 
 
+#include <cmath>
 #include <iostream>
 #include <ostream>
+#include <raylib.h>
 
 GraphEditor::GraphEditor(Graph &graph) : graph(graph) {
     this->graph = graph;
+    this->mode = EditorMode::SELECT;
 }
 
 void GraphEditor::create_edge(int cost , Graph_Node* from , Graph_Node* to ) {
@@ -40,6 +43,10 @@ void GraphEditor::draw() {
     }
 }
 
+void GraphEditor::update() {
+    handle_mouse();
+}
+
 Graph_Node *GraphEditor::get_node_at(std::string name) {
     for (auto node : graph.get_nodes()) {
         if (node->get_name() == name) {
@@ -47,4 +54,39 @@ Graph_Node *GraphEditor::get_node_at(std::string name) {
         }
     }
     return nullptr;
+}
+
+Graph_Node* GraphEditor::get_node_at(Vector2 position) {
+
+    for (auto node : graph.get_nodes()) {
+
+        Vector2 node_position = node->get_position();
+
+        float dx = position.x - node_position.x;
+        float dy = position.y - node_position.y;
+
+        float distance = std::sqrt(dx * dx + dy * dy);
+
+        if (distance <= 30) {
+            return node;
+        }
+    }
+
+    return nullptr;
+}
+
+void GraphEditor::handle_mouse() {
+    Vector2 mouse = GetMousePosition();
+
+    if (mode == EditorMode::SELECT &&
+        IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
+        {
+        if (selected_node != nullptr) {
+            selected_node->set_state(NodeState::UNSEEN);
+        }
+        selected_node = get_node_at(mouse);
+        if (selected_node != nullptr) {
+            selected_node->set_state(NodeState::SELECTED);
+        }
+    }
 }

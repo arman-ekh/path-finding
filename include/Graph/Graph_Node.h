@@ -6,6 +6,12 @@
 #include <vector>
 #include "Edge.h"
 
+enum class NodeState {
+    SELECTED,
+    UNSEEN,
+    SEEN
+};
+
 class Graph_Node {
 
 private:
@@ -16,6 +22,7 @@ private:
     std::vector<Edge*> edges;
 
     int cost=0;
+    NodeState state ;
 
 public:
 
@@ -39,6 +46,10 @@ public:
     void set_cost(int cost);
 
     int get_cost();
+
+    void set_state(NodeState state);
+
+    NodeState get_state();
 };
 
 #endif
