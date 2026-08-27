@@ -8,7 +8,8 @@ enum class EditorMode {
     SELECT,
     CREATE_NODE,
     CREATE_EDGE,
-    DELETE
+    DELETE,
+    SET_GOAL
 };
 
 class GraphEditor {
@@ -20,6 +21,8 @@ private:
     EditorMode mode;
 
     Graph_Node* selected_node = nullptr;
+
+    void set_goal(Graph_Node* node);
 
 public:
 
@@ -42,6 +45,8 @@ public:
     Graph_Node* get_node_at(Vector2 position);
 
     Graph_Node* get_node_at(std::string name);
+
+
 };
 
 #endif

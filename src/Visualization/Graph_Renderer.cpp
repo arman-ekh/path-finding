@@ -5,8 +5,8 @@
 #include <raylib.h>
 
 void GraphRenderer::draw(Graph &graph) {
-    draw_node(graph);
     draw_edge(graph);
+    draw_node(graph);
 }
 
 void GraphRenderer::draw_edge(Graph &graph) {
@@ -32,6 +32,28 @@ void GraphRenderer::draw_node(Graph &graph) {
         }else {
              color = BLUE;
         }
+
+        if (graph.get_goal() == node) {
+            color = RED;
+        }else if (graph.get_start() == node) {
+            color = GREEN;
+        }
+
         DrawCircle(node->get_position().x ,node->get_position().y ,30 , color);
+
+        std::string name = node->get_name();
+
+        int text_width = MeasureText(
+            name.c_str(),
+            20
+        );
+
+        DrawText(
+            name.c_str(),
+            node->get_position().x - text_width / 2,
+            node->get_position().y - 10,
+            20,
+            WHITE
+        );
     }
 }

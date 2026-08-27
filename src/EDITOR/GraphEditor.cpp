@@ -23,6 +23,9 @@ void GraphEditor::create_node(float x, float y) {
     Vector2 vector2(x, y);
 
     graph.add_node(std::string(1, name), vector2);
+    if (graph_size == 1 ) {
+        graph.set_start(graph.get_nodes().at(0));
+    }
 }
 
 void GraphEditor::delete_node(Graph_Node* node) {
@@ -44,6 +47,27 @@ void GraphEditor::draw() {
 }
 
 void GraphEditor::update() {
+
+    if (IsKeyPressed(KEY_N)) {
+        set_mode(EditorMode::CREATE_NODE);
+    }
+
+    if (IsKeyPressed(KEY_E)) {
+        set_mode(EditorMode::CREATE_EDGE);
+    }
+
+    if (IsKeyPressed(KEY_S)) {
+        set_mode(EditorMode::SELECT);
+    }
+
+    if (IsKeyPressed(KEY_D)) {
+        set_mode(EditorMode::DELETE);
+    }
+
+    if (IsKeyPressed(KEY_G)) {
+        set_mode(EditorMode::SET_GOAL);
+    }
+
     handle_mouse();
 }
 
@@ -88,5 +112,48 @@ void GraphEditor::handle_mouse() {
         if (selected_node != nullptr) {
             selected_node->set_state(NodeState::SELECTED);
         }
+    }else if (mode == EditorMode::CREATE_NODE) {
+        if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
+            if (get_node_at(mouse) == nullptr) {
+                create_node(mouse.x, mouse.y);
+            }
+        }
+    }else if (mode == EditorMode::CREATE_EDGE) {
+        if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
+            if (selected_node != nullptr) {
+                selected_node->set_state(NodeState::UNSEEN);
+                Graph_Node* node = get_node_at(mouse);
+                if (node != nullptr && node != selected_node) {
+                    create_edge(1 , selected_node, node);
+                    selected_node = nullptr;
+                }
+            }else {
+                selected_node = get_node_at(mouse);
+                selected_node->set_state(NodeState::SELECTED);
+            }
+        }
+    }else if (mode == EditorMode::DELETE) {
+        if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
+            Graph_Node* node = get_node_at(mouse);
+            if (node != nullptr) {
+                delete_node(node);
+            }
+        }
+    }else if (mode == EditorMode::SET_GOAL) {
+        if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
+            Graph_Node* node = get_node_at(mouse);
+            if (node != nullptr) {
+                set_goal(node);
+            }
+        }
     }
+}
+
+void GraphEditor::set_mode(EditorMode mode) {
+    this->mode = mode;
+}
+
+
+void GraphEditor::set_goal(Graph_Node* node) {
+    graph.set_goal(node);
 }
