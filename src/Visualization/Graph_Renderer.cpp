@@ -30,13 +30,22 @@ void GraphRenderer::draw_node(Graph &graph) {
         if (node->get_state() == NodeState::UNSEEN) {
              color = GRAY;
         }else {
-             color = BLUE;
+            color = BLUE;
+        }
+        if (node->get_state() == NodeState::SEEN) {
+            color = DARKGRAY;
+        }
+
+        if (node->get_state() == NodeState::BEING_CHECKED) {
+            color = GREEN;
+        }else if ((node->get_state() == NodeState::ADDED_TO_FRE)) {
+            color = YELLOW;
         }
 
         if (graph.get_goal() == node) {
-            color = RED;
+            color = PINK;
         }else if (graph.get_start() == node) {
-            color = GREEN;
+            color = RED;
         }
 
         DrawCircle(node->get_position().x ,node->get_position().y ,30 , color);

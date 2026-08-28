@@ -35,6 +35,7 @@ void DFS::step() {
 
     current = stack.top();
     stack.pop();
+    current->set_state(NodeState::BEING_CHECKED);
 
     std::cout << current->get_name() << std::endl;
 
@@ -51,6 +52,7 @@ void DFS::step() {
         Graph_Node* child_node = edge->get_to();
         if (!visited.contains(child_node)) {
             stack.push(child_node);
+            current->set_state(NodeState::ADDED_TO_FRE);
         }
     }
 }

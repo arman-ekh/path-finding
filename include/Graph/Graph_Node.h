@@ -10,8 +10,8 @@ enum class NodeState {
     SELECTED,
     UNSEEN,
     SEEN,
-    GOAL,
-    START
+    BEING_CHECKED,
+    ADDED_TO_FRE
 };
 
 class Graph_Node {

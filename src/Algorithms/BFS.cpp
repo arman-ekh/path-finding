@@ -5,6 +5,10 @@
 void BFS::initialize(Graph &graph) {
     goal = graph.get_goal();
     current = graph.get_start();
+    while (!queue.empty()) {
+        queue.pop();
+    }
+    visited.clear();
     queue.push(current);
 }
 
@@ -21,13 +25,18 @@ bool BFS::is_found() {
 void BFS::step() {
     if (queue.empty() || found)return;
     current = queue.front();
+    if (current != goal) {
+        current->set_state(NodeState::BEING_CHECKED);
+    }
     queue.pop();
 
-    std::cout << current->get_name() << std::endl;
+
 
     if (visited.contains(current)) {
         return;
     }
+
+    std::cout << current->get_name() << std::endl;
     visited.insert(current);
 
     int child_count = current->get_edges().size();
@@ -37,6 +46,9 @@ void BFS::step() {
         Graph_Node* child_node = edge->get_to();
         if (!visited.contains(child_node)) {
             queue.push(child_node);
+            if (current != goal) {
+                child_node->set_state(NodeState::ADDED_TO_FRE);
+            }
         }
     }
 }

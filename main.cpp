@@ -18,7 +18,6 @@ int main() {
     auto *graph_editor = new GraphEditor(graph);
     auto *graph_renderer = new GraphRenderer();
 
-    //
     // graph_editor->create_node(150,100);
     // graph_editor->create_node(100,200);
     // graph_editor->create_node(200,200);
@@ -60,23 +59,40 @@ int main() {
 
         graph_editor->update();
         graph_renderer->draw(graph);
+        if (IsKeyPressed(KEY_RIGHT)) {
+            if (algorithm != nullptr) {
+                if (!algorithm->is_finished() && !algorithm->is_found()) {
+                    algorithm->step();
+                }
+                if (algorithm->is_found()) {
+                    graph.reset_nodes();
+                    algorithm->initialize(graph);
+                }
+            }
+        }
+        else if (IsKeyPressed(KEY_R)) {
+            if (algorithm != nullptr) {
+                graph.reset_nodes();
+                algorithm->initialize(graph);
+            }
+        }
 
 
 
         ClearBackground(WHITE);
         EndDrawing();
     }
-    algorithm->initialize(graph);
-    if (algorithm != nullptr) {
-        std::cout << "goal : "<< graph.get_goal()->get_name() << std::endl;
-        std::cout << "start : "<<graph.get_start()->get_name() << std::endl;
-        while (!algorithm->is_finished() && !algorithm->is_found() ) {
-            algorithm->step();
-        }
-        graph.reset_nodes();
-        std::cout <<"found: " <<algorithm->is_found()<< std::endl;
-    }
-    //graph_editor->draw();
+    // algorithm->initialize(graph);
+    // if (algorithm != nullptr) {
+    //     std::cout << "goal : "<< graph.get_goal()->get_name() << std::endl;
+    //     std::cout << "start : "<<graph.get_start()->get_name() << std::endl;
+    //     while (!algorithm->is_finished() && !algorithm->is_found() ) {
+    //         algorithm->step();
+    //     }
+    //     graph.reset_nodes();
+    //     std::cout <<"found: " <<algorithm->is_found()<< std::endl;
+    // }
+    graph_editor->draw();
 
     return 0;
 }

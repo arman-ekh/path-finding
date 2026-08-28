@@ -25,6 +25,8 @@ void GraphEditor::create_node(float x, float y) {
     graph.add_node(std::string(1, name), vector2);
     if (graph_size == 1 ) {
         graph.set_start(graph.get_nodes().at(0));
+    }else if (graph_size > 1) {
+        graph.set_goal(graph.get_nodes().at(graph_size-1));
     }
 }
 
