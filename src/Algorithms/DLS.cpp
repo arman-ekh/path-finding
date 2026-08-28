@@ -52,6 +52,7 @@ void DLS::step() {
 
     current = stack.top();
 
+
     int index = children_index.top();
 
     int depth = stack.size() - 1;
@@ -63,6 +64,7 @@ void DLS::step() {
               << "depth limit: "
               << depth_limit
               << std::endl;
+    current->set_state(NodeState::BEING_CHECKED);
 
     if (current == goal && depth <= depth_limit) {
         found = true;
@@ -72,8 +74,10 @@ void DLS::step() {
     int child_count = current->get_edges().size();
 
     if (index >= child_count || depth >= depth_limit) {
-
+        Graph_Node* node = stack.top();
+        node->set_state(NodeState::UNSEEN);
         stack.pop();
+
         children_index.pop();
 
         if (!children_index.empty()) {
@@ -89,6 +93,9 @@ void DLS::step() {
     Graph_Node* child = edge->get_to();
 
     stack.push(child);
+    if (child != goal) {
+        child->set_state(NodeState::ADDED_TO_FRE);
+    }
     children_index.push(0);
 }
 

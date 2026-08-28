@@ -4,10 +4,14 @@
 #include "include/Algorithms/Algorithm.h"
 #include "include/Algorithms/BFS.h"
 #include "include/Algorithms/DFS.h"
+#include "include/Algorithms/DLS.h"
+#include "include/Algorithms/IDS.h"
 #include "include/Algorithms/UCS.h"
 #include "include/EDITOR/GraphEditor.h"
 #include "include/Graph/Graph.h"
 #include "include/Visualization/Graph_Renderer.h"
+
+class DLS;
 
 int main() {
 
@@ -38,12 +42,12 @@ int main() {
     // graph_editor->create_edge(3,nodeB,nodeD);
     // graph_editor->create_edge(2 , nodeB , nodeE);
     // graph_editor->create_edge(2 , nodeC , nodeF);
-
+    //
     // graph.set_goal(nodeE);
     // graph.set_start(nodeA);
 
     Algorithm* algorithm = nullptr;
-    algorithm = new BFS();
+    algorithm = new UCS();
 
 
 
@@ -72,7 +76,7 @@ int main() {
         }
         else if (IsKeyPressed(KEY_R)) {
             if (algorithm != nullptr) {
-                graph.reset_nodes();
+                // graph.reset_nodes();
                 algorithm->initialize(graph);
             }
         }
@@ -92,7 +96,7 @@ int main() {
     //     graph.reset_nodes();
     //     std::cout <<"found: " <<algorithm->is_found()<< std::endl;
     // }
-    graph_editor->draw();
+    // graph_editor->draw();
 
     return 0;
 }

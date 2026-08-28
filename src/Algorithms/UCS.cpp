@@ -5,6 +5,8 @@
 void UCS::initialize(Graph &graph) {
     goal = graph.get_goal();
     current = graph.get_start();
+    visited.clear();
+    vector.clear();
     vector.push_back(current);
 }
 
@@ -35,7 +37,9 @@ void UCS::step() {
     vector.erase(vector.begin() + min_index);
 
     std::cout << current->get_name() << std::endl;
-
+    if (current != goal) {
+        current->set_state(NodeState::BEING_CHECKED);
+    }
 
     if (visited.contains(current)) {
         return;
@@ -50,6 +54,9 @@ void UCS::step() {
         if (!visited.contains(child_node)) {
             child_node->set_cost(current->get_cost() + edge->get_cost());
             vector.push_back(child_node);
+            if (current != goal) {
+                child_node->set_state(NodeState::ADDED_TO_FRE);
+            }
         }
     }
 }
