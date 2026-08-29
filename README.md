@@ -52,7 +52,6 @@ src/
 │
 └── Visualization/
     ├── Graph_Renderer.cpp
-    ├── Algorithm_Renderer.cpp
     └── UI.cpp
 ```
 
