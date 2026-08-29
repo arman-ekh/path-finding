@@ -76,6 +76,7 @@ void DLS::step() {
     if (index >= child_count || depth >= depth_limit) {
         Graph_Node* node = stack.top();
         node->set_state(NodeState::UNSEEN);
+        node->set_father(nullptr);
         stack.pop();
 
         children_index.pop();
@@ -93,6 +94,7 @@ void DLS::step() {
     Graph_Node* child = edge->get_to();
 
     stack.push(child);
+    child->set_father(current);
     if (child != goal) {
         child->set_state(NodeState::ADDED_TO_FRE);
     }

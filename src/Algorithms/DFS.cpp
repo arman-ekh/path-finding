@@ -59,6 +59,7 @@ void DFS::step() {
         if (!visited.contains(child_node)) {
             stack.push(child_node);
             if (current != goal) {
+                child_node->set_father(current);
                 child_node->set_state(NodeState::ADDED_TO_FRE);
             }
         }

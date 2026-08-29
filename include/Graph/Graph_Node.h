@@ -11,7 +11,8 @@ enum class NodeState {
     UNSEEN,
     SEEN,
     BEING_CHECKED,
-    ADDED_TO_FRE
+    ADDED_TO_FRE,
+    PATH
 };
 
 class Graph_Node {
@@ -22,6 +23,7 @@ private:
     Vector2 position;
 
     std::vector<Edge*> edges;
+    Graph_Node* father;
 
     int cost=0;
     NodeState state ;
@@ -52,6 +54,10 @@ public:
     void set_state(NodeState state);
 
     NodeState get_state();
+
+    void set_father(Graph_Node* father);
+
+    Graph_Node* get_father();
 };
 
 #endif

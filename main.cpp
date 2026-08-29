@@ -10,13 +10,14 @@
 #include "include/EDITOR/GraphEditor.h"
 #include "include/Graph/Graph.h"
 #include "include/Visualization/Graph_Renderer.h"
+#include "include/Visualization/UI.h"
 
 class DLS;
 
 int main() {
 
-    const int screenWidth = 1280;
-    const int screenHeight = 720;
+    const int screenWidth = 1440;
+    const int screenHeight = 960;
 
     Graph graph;
     auto *graph_editor = new GraphEditor(graph);
@@ -47,7 +48,7 @@ int main() {
     // graph.set_start(nodeA);
 
     Algorithm* algorithm = nullptr;
-    algorithm = new UCS();
+    algorithm = new BFS();
 
 
 
@@ -55,13 +56,29 @@ int main() {
     InitWindow(screenWidth, screenHeight, "PATH_FINDING");
     SetTargetFPS(60);
 
+    std::stack<Graph_Node*> path;
+
+    UI ui;
+    ui.initialize(screenWidth, screenHeight , graph_editor);
+    bool ui_box = false;
+
     float dt;
     while (!WindowShouldClose()) {
         dt = GetFrameTime();
         BeginDrawing();
 
+        if (GetMouseX() >= screenWidth - screenWidth/4) {
+            ui_box = true;
+        }else {
+            ui_box = false;
+        }
 
-        graph_editor->update();
+        if (!ui_box) {
+            graph_editor->update();
+        }else {
+            ui.update();
+        }
+
         graph_renderer->draw(graph);
         if (IsKeyPressed(KEY_RIGHT)) {
             if (algorithm != nullptr) {
@@ -69,18 +86,29 @@ int main() {
                     algorithm->step();
                 }
                 if (algorithm->is_found()) {
+                    Graph_Node* father = graph.get_goal();
+                    while (father != nullptr) {
+                        std::cout <<"path: " <<father->get_name() << std::endl;
+                        path.push(father);
+                        father = father->get_father();
+                    }
                     graph.reset_nodes();
                     algorithm->initialize(graph);
+                    while (!path.empty()) {
+                        path.top()->set_state(NodeState::PATH);
+                        path.pop();
+                    }
                 }
             }
         }
         else if (IsKeyPressed(KEY_R)) {
             if (algorithm != nullptr) {
-                // graph.reset_nodes();
+                graph.reset_nodes();
                 algorithm->initialize(graph);
             }
         }
 
+        ui.draw();
 
 
         ClearBackground(WHITE);

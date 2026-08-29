@@ -48,6 +48,10 @@ void GraphRenderer::draw_node(Graph &graph) {
             color = RED;
         }
 
+        if (node->get_state() == NodeState::PATH) {
+            color = SKYBLUE;
+        }
+
         DrawCircle(node->get_position().x ,node->get_position().y ,30 , color);
 
         std::string name = node->get_name();

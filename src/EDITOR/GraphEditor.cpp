@@ -31,7 +31,21 @@ void GraphEditor::create_node(float x, float y) {
 }
 
 void GraphEditor::delete_node(Graph_Node* node) {
-    graph.delete_node(node);
+    if (graph.get_start() == node) {
+        graph.delete_node(node);
+        if (graph.get_nodes().size() >= 1) {
+            Graph_Node* next_start = graph.get_nodes().at(0);
+            if (next_start != nullptr) {
+                if (next_start == graph.get_goal()) {
+                    graph.set_goal(nullptr);
+                }
+                graph.set_start(next_start);
+            }
+        }
+    }else {
+        graph.delete_node(node);
+    }
+
 }
 
 void GraphEditor::draw() {
@@ -131,7 +145,9 @@ void GraphEditor::handle_mouse() {
                 }
             }else {
                 selected_node = get_node_at(mouse);
-                selected_node->set_state(NodeState::SELECTED);
+                if (selected_node != nullptr) {
+                    selected_node->set_state(NodeState::SELECTED);
+                }
             }
         }
     }else if (mode == EditorMode::DELETE) {

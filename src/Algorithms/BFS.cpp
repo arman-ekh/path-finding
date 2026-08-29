@@ -47,6 +47,7 @@ void BFS::step() {
         if (!visited.contains(child_node)) {
             queue.push(child_node);
             if (current != goal) {
+                child_node->set_father(current);
                 child_node->set_state(NodeState::ADDED_TO_FRE);
             }
         }

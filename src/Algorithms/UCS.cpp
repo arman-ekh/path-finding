@@ -54,6 +54,7 @@ void UCS::step() {
         if (!visited.contains(child_node)) {
             child_node->set_cost(current->get_cost() + edge->get_cost());
             vector.push_back(child_node);
+            child_node->set_father(current);
             if (current != goal) {
                 child_node->set_state(NodeState::ADDED_TO_FRE);
             }
