@@ -31,6 +31,8 @@ add_executable(path_finding main.cpp
         src/Graph/Graph_Node.cpp
         src/Visualization/Graph_Renderer.cpp
         src/Visualization/UI.cpp
+        src/EDITOR/AlgorithmController.cpp
+        include/EDITOR/AlgorithmController.h
 )
 
 

@@ -17,7 +17,7 @@ private:
 
     bool finished = false;
     bool found = false;
-    int depth_limit = 0;
+    int depth_limit = 2;
     int depth = 0;
 
 public:

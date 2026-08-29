@@ -5,6 +5,7 @@
 #include <raylib.h>
 #include <string>
 #include "..\EDITOR/GraphEditor.h"
+#include "..\EDITOR/AlgorithmController.h"
 
 class Button {
 
@@ -55,6 +56,8 @@ class UI {
     private:
         int screenWidth, screenHeight;
         GraphEditor* graphEditor;
+        AlgorithmController* algorithmController;
+
         Button* select_button;
         Button* add_edge;
         Button* delete_node;
@@ -63,9 +66,16 @@ class UI {
         std::string description;
         std::string selected_tool;
 
+    Button* bfs_button;
+    Button* dfs_button;
+    Button* dls_button;
+    Button* ids_button;
+    Button* ucs_button;
+
+
     public:
         void draw();
-        void initialize(int screenWidth , int screenHeight , GraphEditor* graphEditor);
+        void initialize(int screenWidth , int screenHeight , GraphEditor* graphEditor , AlgorithmController* algorithmController);
         void update();
 
 };

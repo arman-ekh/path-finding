@@ -7,6 +7,7 @@
 #include "include/Algorithms/DLS.h"
 #include "include/Algorithms/IDS.h"
 #include "include/Algorithms/UCS.h"
+#include "include/EDITOR/AlgorithmController.h"
 #include "include/EDITOR/GraphEditor.h"
 #include "include/Graph/Graph.h"
 #include "include/Visualization/Graph_Renderer.h"
@@ -22,6 +23,7 @@ int main() {
     Graph graph;
     auto *graph_editor = new GraphEditor(graph);
     auto *graph_renderer = new GraphRenderer();
+    AlgorithmController* algorithm_controller= new AlgorithmController(&graph);
 
     // graph_editor->create_node(150,100);
     // graph_editor->create_node(100,200);
@@ -47,8 +49,8 @@ int main() {
     // graph.set_goal(nodeE);
     // graph.set_start(nodeA);
 
-    Algorithm* algorithm = nullptr;
-    algorithm = new BFS();
+    // Algorithm* algorithm = nullptr;
+    // algorithm = new BFS();
 
 
 
@@ -56,10 +58,9 @@ int main() {
     InitWindow(screenWidth, screenHeight, "PATH_FINDING");
     SetTargetFPS(60);
 
-    std::stack<Graph_Node*> path;
 
     UI ui;
-    ui.initialize(screenWidth, screenHeight , graph_editor);
+    ui.initialize(screenWidth, screenHeight , graph_editor , algorithm_controller);
     bool ui_box = false;
 
     float dt;
@@ -81,31 +82,11 @@ int main() {
 
         graph_renderer->draw(graph);
         if (IsKeyPressed(KEY_RIGHT)) {
-            if (algorithm != nullptr) {
-                if (!algorithm->is_finished() && !algorithm->is_found()) {
-                    algorithm->step();
-                }
-                if (algorithm->is_found()) {
-                    Graph_Node* father = graph.get_goal();
-                    while (father != nullptr) {
-                        std::cout <<"path: " <<father->get_name() << std::endl;
-                        path.push(father);
-                        father = father->get_father();
-                    }
-                    graph.reset_nodes();
-                    algorithm->initialize(graph);
-                    while (!path.empty()) {
-                        path.top()->set_state(NodeState::PATH);
-                        path.pop();
-                    }
-                }
-            }
+            algorithm_controller->step();
         }
-        else if (IsKeyPressed(KEY_R)) {
-            if (algorithm != nullptr) {
-                graph.reset_nodes();
-                algorithm->initialize(graph);
-            }
+
+        if (IsKeyPressed(KEY_R)) {
+            algorithm_controller->reset();
         }
 
         ui.draw();
@@ -114,17 +95,5 @@ int main() {
         ClearBackground(WHITE);
         EndDrawing();
     }
-    // algorithm->initialize(graph);
-    // if (algorithm != nullptr) {
-    //     std::cout << "goal : "<< graph.get_goal()->get_name() << std::endl;
-    //     std::cout << "start : "<<graph.get_start()->get_name() << std::endl;
-    //     while (!algorithm->is_finished() && !algorithm->is_found() ) {
-    //         algorithm->step();
-    //     }
-    //     graph.reset_nodes();
-    //     std::cout <<"found: " <<algorithm->is_found()<< std::endl;
-    // }
-    // graph_editor->draw();
-
     return 0;
 }
