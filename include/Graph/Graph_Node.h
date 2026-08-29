@@ -19,8 +19,8 @@ class Graph_Node {
 
 private:
     std::string name;
-
     Vector2 position;
+    int node_depth =0;
 
     std::vector<Edge*> edges;
     Graph_Node* father;
@@ -58,6 +58,9 @@ public:
     void set_father(Graph_Node* father);
 
     Graph_Node* get_father();
+
+    void set_node_depth(int depth);
+    int get_node_depth();
 };
 
 #endif

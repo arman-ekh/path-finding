@@ -4,6 +4,7 @@ Graph_Node::Graph_Node(const std::string &name, Vector2 position) {
     this->name = name;
     this->position = position;
     this->cost = 0;
+    this->node_depth = 0;
     this->state = NodeState::UNSEEN;
     this->father = nullptr;
 }
@@ -59,4 +60,12 @@ void Graph_Node::set_father(Graph_Node *father) {
 
 Graph_Node* Graph_Node::get_father() {
     return this->father;
+}
+
+int Graph_Node::get_node_depth() {
+    return this->node_depth;
+}
+
+void Graph_Node::set_node_depth(int depth) {
+    this->node_depth = depth;
 }

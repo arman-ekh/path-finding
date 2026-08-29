@@ -10,6 +10,7 @@ void Graph::add_edge(Graph_Node *from, Graph_Node *to, int cost) {
    Edge *edge = new Edge(from, to, cost);
     this->edges.push_back(edge);
     from->add_edge(edge);
+    to->set_node_depth(from->get_node_depth() + 1);
 }
 
 void Graph::set_goal(Graph_Node *node) {
