@@ -135,10 +135,14 @@ void GraphEditor::handle_mouse() {
             }
         }
     }else if (mode == EditorMode::CREATE_EDGE) {
+        if (selected_node != nullptr) {
+            DrawLineEx(selected_node->get_position(), mouse ,5 ,BLACK);
+        }
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
             if (selected_node != nullptr) {
                 selected_node->set_state(NodeState::UNSEEN);
                 Graph_Node* node = get_node_at(mouse);
+
                 if (node != nullptr && node != selected_node) {
                     create_edge(1 , selected_node, node);
                     selected_node = nullptr;
