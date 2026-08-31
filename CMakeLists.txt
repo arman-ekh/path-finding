@@ -35,6 +35,8 @@ add_executable(path_finding main.cpp
         include/EDITOR/AlgorithmController.h
         src/Algorithms/GreedySearch.cpp
         include/Algorithms/GreedySearch.h
+        src/Algorithms/A_Star.cpp
+        include/Algorithms/A_Star.h
 )
 
 

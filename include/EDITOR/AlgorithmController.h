@@ -14,14 +14,15 @@ enum class AlgorithmType {
     DLS,
     IDS,
     UCS,
-    GreedySearch
+    GreedySearch,
+    A_star
 };
 
 class AlgorithmController {
 private:
     Graph* graph;
     Algorithm* algorithm = nullptr;
-    AlgorithmType algorithm_type = AlgorithmType::GreedySearch;
+    AlgorithmType algorithm_type = AlgorithmType::BFS;
 
     bool running = false;
     std::stack<Graph_Node*> path;

@@ -1,9 +1,11 @@
 #include "../../include/Graph/Edge.h"
 
+#include "../../include/Algorithms/GreedySearch.h"
+
 Edge::Edge(Graph_Node *from, Graph_Node *to, int cost) {
     this->from = from;
     this->to = to;
-    this->cost = cost;
+    this->cost = GreedySearch::manhattan_distance(from, to);
 }
 
 int Edge::get_cost(){

@@ -2,6 +2,7 @@
 
 #include <iostream>
 
+#include "../../include/Algorithms/A_Star.h"
 #include "../../include/Algorithms/GreedySearch.h"
 
 AlgorithmController::AlgorithmController(Graph* graph) {
@@ -44,6 +45,10 @@ void AlgorithmController::set_algorithm(AlgorithmType type) {
 
         case AlgorithmType::GreedySearch:
             algorithm = new GreedySearch();
+            break;
+
+        case AlgorithmType::A_star:
+            algorithm = new A_Star();
             break;
     }
 
