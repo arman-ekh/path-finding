@@ -71,7 +71,7 @@ class UI {
     Button* dls_button;
     Button* ids_button;
     Button* ucs_button;
-
+    Button* greedy_search;
 
     public:
         void draw();

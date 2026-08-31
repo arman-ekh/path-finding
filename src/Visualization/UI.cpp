@@ -26,6 +26,7 @@ void UI::initialize(int screenWidth, int screenHeight , GraphEditor* graphEditor
     this->dls_button = new Button(Rectangle(button_x+(2*button_width)/3, 800, button_width/3-5, 50),"DLS");
     this->ids_button = new Button(Rectangle(button_x, 900, button_width/3-5, 50),"IDS");
     this->ucs_button = new Button(Rectangle(button_x+button_width/3, 900, button_width/3-5, 50),"UCS");
+    this->greedy_search = new Button(Rectangle(button_x+(2*button_width)/3 , 900 ,button_width/3-5 , 50 ) , "Greedy");
 }
 
 void UI::draw() {
@@ -41,6 +42,7 @@ void UI::draw() {
     dls_button->draw();
     ids_button->draw();
     ucs_button->draw();
+    greedy_search->draw();
 
     DrawText(
         selected_tool.c_str(),
@@ -138,6 +140,12 @@ void UI::update() {
     if (ucs_button->is_clicked()) {
         algorithmController->set_algorithm(
             AlgorithmType::UCS
+        );
+    }
+
+    if (greedy_search->is_clicked()) {
+        algorithmController->set_algorithm(
+            AlgorithmType::GreedySearch
         );
     }
 }
