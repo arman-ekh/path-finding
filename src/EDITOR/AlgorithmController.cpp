@@ -2,6 +2,8 @@
 
 #include <iostream>
 
+#include "../../include/Algorithms/GreedySearch.h"
+
 AlgorithmController::AlgorithmController(Graph* graph) {
     this->graph = graph;
     set_algorithm(AlgorithmType::BFS);
@@ -38,6 +40,10 @@ void AlgorithmController::set_algorithm(AlgorithmType type) {
 
         case AlgorithmType::UCS:
             algorithm = new UCS();
+            break;
+
+        case AlgorithmType::GreedySearch:
+            algorithm = new GreedySearch();
             break;
     }
 

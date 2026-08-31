@@ -33,6 +33,8 @@ add_executable(path_finding main.cpp
         src/Visualization/UI.cpp
         src/EDITOR/AlgorithmController.cpp
         include/EDITOR/AlgorithmController.h
+        src/Algorithms/GreedySearch.cpp
+        include/Algorithms/GreedySearch.h
 )
 
 
