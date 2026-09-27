@@ -1,12 +1,6 @@
 #include <iostream>
 
 #include "raylib.h"
-#include "include/Algorithms/Algorithm.h"
-#include "include/Algorithms/BFS.h"
-#include "include/Algorithms/DFS.h"
-#include "include/Algorithms/DLS.h"
-#include "include/Algorithms/IDS.h"
-#include "include/Algorithms/UCS.h"
 #include "include/EDITOR/AlgorithmController.h"
 #include "include/EDITOR/GraphEditor.h"
 #include "include/Graph/Graph.h"
